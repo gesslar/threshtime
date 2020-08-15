@@ -1,17 +1,23 @@
 const rlDateInput = document.getElementById( "rldateinput" )
 const rlTimeInput = document.getElementById( "rltimeinput" )
 const icDateTimeOuput = document.getElementById( "icdatetimeoutput" )
+const etDateTimeOuput = document.getElementById( "etdatetimeoutput" )
 
-const getCurrentTime = _ => {
-    const now = moment.tz( new Date().getTime(), "America/Toronto" )
-    console.log(now)
-    return now 
+const getCurrentTimeET = (timestamp) => {
+    let currentDate, currentTime;
+    
+    if(timestamp === undefined) {
+        currentDate = moment.tz( "America/Toronto" )
+        currentTime = moment.tz( "America/Toronto" )
+    } else {
+        currentDate = moment.tz( timestamp, "America/Toronto" )
+        currentTime = moment.tz( timestamp, "America/Toronto" )
+    }
+    
+    return `${currentDate.format("yyyy-MM-DD")} ${currentTime.format("LT")}`
 }
 
-const setCurrentDateTime = _ => {
-
-    // console.log( getCurrentTime() )
-
+const setCurrentDateTime = () => {
     const now = new Date()
     const formatter = new Intl.DateTimeFormat( "en-US", {
         year: 'numeric',
@@ -37,19 +43,18 @@ const setCurrentDateTime = _ => {
     rlDateInput.value = `${dateString[2]}-${dateString[0]}-${dateString[1]}`
     rlTimeInput.value = `${dateString[3]}:${dateString[4]}:00.000`
 
-    updateICTime(rlDateInput.value, rlTimeInput.value)
+    updateTimes(rlDateInput.value, rlTimeInput.value)
 }
 
-const updateICTime = (dateValue, timeValue) => {
-    console.log(dateValue, timeValue)
+const updateTimes = (dateValue, timeValue) => {
     const date = new Date(`${dateValue} ${timeValue}`)
     const threshDate = new ThreshDateTime( date )
-    const value = threshDate.getDisplayValue()
-    console.log(value)
-    icDateTimeOuput.value = threshDate.getDisplayValue()
+    const etDateTime = getCurrentTimeET( date.getTime() )
 
+    icDateTimeOuput.value = threshDate.getDisplayValue()
+    etDateTimeOuput.value = etDateTime
 }
 
-rlDateInput.addEventListener("change", event => updateICTime(rlDateInput.value, rlTimeInput.value))
-rlTimeInput.addEventListener("change", event => updateICTime(rlDateInput.value, rlTimeInput.value))
+rlDateInput.addEventListener("change", event => updateTimes(rlDateInput.value, rlTimeInput.value))
+rlTimeInput.addEventListener("change", event => updateTimes(rlDateInput.value, rlTimeInput.value))
 

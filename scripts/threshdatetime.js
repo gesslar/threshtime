@@ -45,7 +45,3 @@ class ThreshDateTime {
         }
     }
 }
-
-const tdt = new ThreshDateTime( new Date() );
-
-console.log( tdt.getDisplayValue() )

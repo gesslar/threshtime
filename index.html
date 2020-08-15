@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script defer src="scripts/main.js"></script>
     <script defer src="scripts/config.js"></script>
-    <script defer src="scripts/conversion.js"></script>
     <script defer src="scripts/threshdatetime.js"></script>
     <script defer src="scripts/moment.min.js"></script>
     <script defer src="scripts/moment-timezone-with-data.js"></script>
@@ -16,13 +15,20 @@
     <form>
         <div>
             <div>
-                <input type="date" name="" id="rldateinput">
-                <input type="time" name="" id="rltimeinput">
-                <input type="text" name="" id="icdatetimeoutput">
+                Select a date and time:
+                <input type="date" id="rldateinput">
+                <input type="time" id="rltimeinput">
             </div>
+            <hr />
             <div>
-                
+                IC Date/Time:
+                <input type="text" id="icdatetimeoutput">
+                Eastern Time:
+                <input type="text" id="etdatetimeoutput">
             </div>
+        </div>
+        <div id="text">
+
         </div>
     </form>
 </body>
