@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thresh RL to IC Date/Time Converter</title>
+    <link rel="shortcut icon" type="image/png" href="images/5523616-clock-png-high-quality-image-png-arts-png-clock-980_980_preview.png">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <script defer src="scripts/main.js"></script>
     <script defer src="scripts/config.js"></script>
     <script defer src="scripts/threshdatetime.js"></script>
@@ -12,29 +14,38 @@
     <script defer src="scripts/moment-timezone-with-data.js"></script>
 </head>
 <body onload="setCurrentDateTime()">
-    <form>
-        <div>
-            <div>
-                Select a date and time in your local time:
-                <input type="date" id="rldateinput">
-                <input type="time" id="rltimeinput">
+    <div class="bg-success section-heading">
+        <h2 class="text-smaller">
+            Select a date and time in your local time
+        </h2>
+    </div>
+    <div class="input-area">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <input class="form-control" type="date" id="rldateinput">
             </div>
-            <hr />
-            <div>
-                Results:
+            <div class="col-auto">
+                <input class="form-control"type="time" id="rltimeinput">
             </div>
-            <div>
-                IC Date/Time:
-                <input type="text" id="icdatetimeoutput">                    
+        </div>    
+    </div>
+    <div class="bg-success section-heading">
+        <h2>
+            Results
+        </h2>
+    </div>
+    <div class="output-area">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                IC Date/Time
+                <input class="form-control form-control-plaintext" type="text" id="icdatetimeoutput" readonly>       
             </div>
-            <div>
-                Eastern Time:
-                <input type="text" id="etdatetimeoutput">
+            <div class="col-auto">
+                Eastern Time
+                <input class="form-control form-control-plaintext" type="text" id="etdatetimeoutput" readonly>    
             </div>
         </div>
-        <div id="text">
-
-        </div>
-    </form>
+    
+    </div>
 </body>
 </html>
