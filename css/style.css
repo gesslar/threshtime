@@ -1,0 +1,15 @@
+body {
+    padding: 10px;
+}
+
+.section-heading {
+    background-image: var(--bs-gradient);
+    border-radius: 4px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.output-area, .input-area {
+    padding: 5px;
+    margin: 10px;
+}
