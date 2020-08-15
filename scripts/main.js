@@ -2,7 +2,16 @@ const rlDateInput = document.getElementById( "rldateinput" )
 const rlTimeInput = document.getElementById( "rltimeinput" )
 const icDateTimeOuput = document.getElementById( "icdatetimeoutput" )
 
+const getCurrentTime = _ => {
+    const now = moment.tz( new Date().getTime(), "America/Toronto" )
+    console.log(now)
+    return now 
+}
+
 const setCurrentDateTime = _ => {
+
+    // console.log( getCurrentTime() )
+
     const now = new Date()
     const formatter = new Intl.DateTimeFormat( "en-US", {
         year: 'numeric',
