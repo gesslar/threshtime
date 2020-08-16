@@ -2,6 +2,10 @@ const rlDateInput = document.getElementById( "rldateinput" )
 const rlTimeInput = document.getElementById( "rltimeinput" )
 const icDateTimeOuput = document.getElementById( "icdatetimeoutput" )
 const etDateTimeOuput = document.getElementById( "etdatetimeoutput" )
+const cpIc = document.getElementById( "copyic" )
+const cpEt = document.getElementById( "copyet" )
+const copiedIc = document.getElementById( "copiedic" )
+const copiedEt = document.getElementById( "copiedet" )
 
 const getCurrentTimeET = (timestamp) => {
     let currentDate, currentTime;
@@ -55,6 +59,19 @@ const updateTimes = (dateValue, timeValue) => {
     etDateTimeOuput.value = etDateTime
 }
 
+const copyInformation = (control, statuscontrol) => {
+    control.select()
+    control.setSelectionRange(0, 999999)
+    document.execCommand("copy")
+    control.blur()
+    window.getSelection().removeAllRanges()
+    statuscontrol.classList.remove("copied-hide")
+    setTimeout( control => {
+        control.classList.add("copied-hide")
+    }, 1000, statuscontrol)
+}
+
 rlDateInput.addEventListener("change", event => updateTimes(rlDateInput.value, rlTimeInput.value))
 rlTimeInput.addEventListener("change", event => updateTimes(rlDateInput.value, rlTimeInput.value))
-
+cpIc.addEventListener("click", event => copyInformation(icDateTimeOuput, copiedIc))
+cpEt.addEventListener("click", event => copyInformation(etDateTimeOuput, copiedEt))
