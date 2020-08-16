@@ -15,5 +15,6 @@ body {
 }
 
 .copied-hide {
-    visibility: hidden;
+    display: none !important;
 }
+
