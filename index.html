@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThreshTime</title>
+    <title>Thresh RL to IC Date/Time Converter</title>
     <link rel="shortcut icon" type="image/png" href="images/5523616-clock-png-high-quality-image-png-arts-png-clock-980_980_preview.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
@@ -35,16 +35,57 @@
         </h2>
     </div>
     <div class="output-area">
-        <div class="row g-3 align-items-center">
+        <!-- IC TIME -->
+        <!-- <div class="row g-3 align-items-center">
             <div class="col-auto">
                 IC Date/Time
+            </div>
+            <div class="col-auto">
                 <input class="form-control form-control-plaintext" type="text" id="icdatetimeoutput" readonly>       
             </div>
             <div class="col-auto">
-                Eastern Time
-                <input class="form-control form-control-plaintext" type="text" id="etdatetimeoutput" readonly>    
+                <button type="button" class="btn btn-success mb-3" id="copyic">Copy</button>
             </div>
-        </div>    
+            <div class="col-auto" id="copiedic"></div>
+        </div> -->
+
+        <div>
+            <strong>
+                In Character Date/Time
+            </strong>
+        </div>
+        <div class="input-group">
+            <input class="form-control" type="text" id="icdatetimeoutput" readonly>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success" id="copyic">Copy</button>
+            </span>
+        </div>
+        <div class="col-auto copied-hide" id="copiedic">Copied</div>
+
+        <div>
+            <strong>Eastern Date/Time</strong>
+        </div>
+        <div class="input-group">
+            <input class="form-control" type="text" id="etdatetimeoutput" readonly>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success" id="copyet">Copy</button>
+            </span>
+        </div>
+        <div class="col-auto copied-hide" id="copiedet">Copied</div>
+
+        <!-- EASTERN TIME -->
+        <!-- <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                Eastern Time
+            </div>
+            <div class="col-auto">
+                <input class="form-control form-control-plaintext" type="text" id="etdatetimeoutput" readonly>       
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-success mb-3" id="copyet">Copy</button>
+            </div>
+            <div class="col-auto" id="copiedet"></div>
+        </div> -->
     </div>
     <div class="fixed-bottom">
         Follow this project on <a href="https://github.com/gesslar/threshtime">GitHub</a>.
