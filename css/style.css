@@ -18,3 +18,32 @@ body {
     display: none !important;
 }
 
+.working-hide {
+    display: none !important;
+}
+
+.moreinfo {
+    border: 0 none #fff;
+    overflow: hidden;
+    background-color: transparent;
+    outline: none;
+}
+
+.moreinfo:focus {
+    outline: none;
+    background-color: transparent;
+    border: 0 none #fff;
+    overflow: hidden;
+}
+
+.overlay {
+    background-color:#EFEFEF;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    top: 0px;
+    left: 0px;
+    opacity: .5; /* in FireFox */ 
+    filter: alpha(opacity=50); /* in IE */
+}

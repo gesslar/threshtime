@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <script defer src="scripts/main.js"></script>
-    <script defer src="scripts/config.js"></script>
-    <script defer src="scripts/threshdatetime.js"></script>
+    <!-- <script defer src="scripts/config.js"></script> -->
+    <!-- <script defer src="scripts/threshdatetime.js"></script> -->
     <script defer src="scripts/moment.min.js"></script>
     <script defer src="scripts/moment-timezone-with-data.js"></script>
 </head>
@@ -27,7 +27,11 @@
             <div class="col-auto">
                 <input class="form-control"type="time" id="rltimeinput">
             </div>
-        </div>    
+            <div class="col-auto">
+                <input class="btn btn-success" type="button" value="Convert" id="convert">
+                <span id="working" class="working-hide badge bg-danger">Working</span>
+            </div>
+        </div>
     </div>
     <div class="bg-success section-heading">
         <h2>
@@ -35,42 +39,51 @@
         </h2>
     </div>
     <div class="output-area">
-    <!-- IC TIME -->
-        <div class="row">
-            <div class="col">
-                <div>
-                    <strong>In Character Date/Time</strong>
-                    <span id="copiedic" class="copied-hide badge bg-success">Copied</span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-auto">
-                <div class="input-group">
-                    <input class="form-control" type="text" id="icdatetimeoutput" readonly>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-success" id="copyic">Copy</button>
-                    </span>
-                </div>
-            </div>
-        </div>
-
         <!-- EASTERN TIME -->
-        <div class="row">
-            <div class="col">
-                <div>
+        <div>
+            <div class="row">
+                <div class="col-5">
                     <strong>Eastern Date/Time</strong>
                     <span id="copiedet" class="copied-hide badge bg-success">Copied</span>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-5">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="etdatetimeoutput" readonly>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-success" id="copyet">Copy</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-auto">
-                <div class="input-group">
-                    <input class="form-control" type="text" id="etdatetimeoutput" readonly>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-success" id="copyet">Copy</button>
-                    </span>
+        <!-- IC TIME -->
+        <div>
+            <div class="row">
+                <div class="col-5">
+                    <strong>In Character Date/Time</strong>
+                    <span id="copiedic" class="copied-hide badge bg-success">Copied</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="icdatetimeoutput" readonly>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-success" id="copyic">Copy</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-5">
+                        <strong>Additional Information</strong>
+                    </div>
+                </div>    
+                <div class="col-5" id="icmoreinfo">
+                    
                 </div>
             </div>
         </div>
