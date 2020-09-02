@@ -2,10 +2,13 @@ const rlDateInput = document.getElementById( "rldateinput" )
 const rlTimeInput = document.getElementById( "rltimeinput" )
 const icDateTimeOuput = document.getElementById( "icdatetimeoutput" )
 const etDateTimeOuput = document.getElementById( "etdatetimeoutput" )
+const icMoreInfoOutput = document.getElementById( "icmoreinfo" )
 const cpIc = document.getElementById( "copyic" )
 const cpEt = document.getElementById( "copyet" )
 const copiedIc = document.getElementById( "copiedic" )
 const copiedEt = document.getElementById( "copiedet" )
+const convertButton = document.getElementById( "convert" )
+const workingBadge = document.getElementById( "working" )
 
 const getCurrentTimeET = (timestamp) => {
     let currentDate, currentTime;
@@ -50,13 +53,31 @@ const setCurrentDateTime = () => {
     updateTimes(rlDateInput.value, rlTimeInput.value)
 }
 
-const updateTimes = (dateValue, timeValue) => {
+const updateTimes = async (dateValue, timeValue) => {
+    // grey out the screen and show the working badge
+    const div = document.createElement("div")
+    div.className += "overlay"
+    document.body.appendChild(div)
+    workingBadge.classList.remove("working-hide")
+
     const date = new Date(`${dateValue} ${timeValue}`)
-    const threshDate = new ThreshDateTime( date )
+    const unixTime = date.getTime()
+    const uri = `https://fern-ahead-jelly.glitch.me/time/${unixTime}`
+    const response = await fetch(uri)
+    const jsonified = await response.json()
+    const threshDate = jsonified.ic
     const etDateTime = getCurrentTimeET( date.getTime() )
 
-    icDateTimeOuput.value = threshDate.getDisplayValue()
     etDateTimeOuput.value = etDateTime
+    icDateTimeOuput.value = `${jsonified.monthName} ${jsonified.day}, ${jsonified.year} ${jsonified.hour}:${jsonified.minute}`
+    icMoreInfoOutput.innerText =
+    `Weekday: ${jsonified.weekday}\n` +
+    `Season: ${jsonified.stage.charAt(0).toUpperCase()}${jsonified.stage.slice(1)} ${jsonified.season.charAt(0).toUpperCase()}${jsonified.season.slice(1)}\n` +
+    `Devotion: ${jsonified.devotion}`
+
+    // remove the greyed out and hide the working badge
+    document.body.removeChild(div)
+    workingBadge.classList.add("working-hide")
 }
 
 const copyInformation = (control, statuscontrol) => {
@@ -71,7 +92,6 @@ const copyInformation = (control, statuscontrol) => {
     }, 1000, statuscontrol)
 }
 
-rlDateInput.addEventListener("change", event => updateTimes(rlDateInput.value, rlTimeInput.value))
-rlTimeInput.addEventListener("change", event => updateTimes(rlDateInput.value, rlTimeInput.value))
 cpIc.addEventListener("click", event => copyInformation(icDateTimeOuput, copiedIc))
 cpEt.addEventListener("click", event => copyInformation(etDateTimeOuput, copiedEt))
+convertButton.addEventListener("click", event => updateTimes( rlDateInput.value, rlTimeInput.value ))
