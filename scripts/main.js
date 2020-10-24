@@ -69,7 +69,7 @@ const updateTimes = async (dateValue, timeValue) => {
     const etDateTime = getCurrentTimeET( date.getTime() )
 
     etDateTimeOuput.value = etDateTime
-    icDateTimeOuput.value = `${jsonified.monthName} ${jsonified.day}, ${jsonified.year} ${jsonified.hour}:${jsonified.minute}`
+    icDateTimeOuput.value = `${jsonified.monthName} ${jsonified.day}, ${jsonified.year} ${jsonified.hour}:${padWithZeroes(jsonified.minute, 2)}`
     icMoreInfoOutput.innerText =
     `Weekday: ${jsonified.weekday}\n` +
     `Season: ${jsonified.stage.charAt(0).toUpperCase()}${jsonified.stage.slice(1)} ${jsonified.season.charAt(0).toUpperCase()}${jsonified.season.slice(1)}\n` +
@@ -78,6 +78,13 @@ const updateTimes = async (dateValue, timeValue) => {
     // remove the greyed out and hide the working badge
     document.body.removeChild(div)
     workingBadge.classList.add("working-hide")
+}
+
+const padWithZeroes = (given, padding) => {
+    let result = given.toString() 
+
+    if(result.length >= padding) return result 
+    return `${"0".repeat(padding - result.length)}${result}`
 }
 
 const copyInformation = (control, statuscontrol) => {
