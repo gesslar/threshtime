@@ -1,0 +1,8 @@
+{
+  "name": "threshtime",
+  "author": {
+    "name": "gesslar"
+  },
+  "description": "A page to convert between real life time and Threshold in-game time.",
+  "license": "0BSD"
+}
