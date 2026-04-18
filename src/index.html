@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThreshTime</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/hourglass.svg">
+  <script defer src="scripts/main.js" type="module"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <main>
+
+    <div class="section-heading">
+      <h2>
+        Select a date and time in your local time
+      </h2>
+    </div>
+
+    <div class="section">
+      <div class="group">
+        <input type="date" id="rldateinput" class="rounded-left" />
+        <input type="time" id="rltimeinput" />
+        <span class="sep"></span>
+        <button id="convert" class="rounded-right">Convert</button>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <h2>
+        Result
+      </h2>
+    </div>
+
+    <div class="section">
+
+      <!-- EASTERN TIME -->
+      <div class="etresult">
+        <div>
+          <strong>Eastern Date/Time</strong>
+        </div>
+
+        <div class="group">
+          <input type="text" id="etdatetimeoutput" class="result rounded-left" readonly>
+          <span class="sep"></span>
+          <button type="button" id="copyet" class="copy rounded-right">Copy</button>
+        </div>
+      </div>
+
+      <!-- IC TIME -->
+      <div class="icresult">
+        <div>
+          <strong>In Character Date/Time</strong>
+        </div>
+
+        <div class="group">
+          <input type="text" id="icdatetimeoutput" class="result rounded-left" readonly>
+          <span class="sep"></span>
+          <button type="button" id="copyic" class="copy rounded-right">Copy</button>
+        </div>
+
+        <div class="moreinfo">
+          <strong>Additional Information</strong>
+        </div>
+        <div id="icmoreinfo">
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div id="github">
+      <a href="https://github.com/gesslar/threshtime" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        Visit this project on GitHub
+      </a>
+    </div>
+  </footer>
+
+</body>
+
+</html>
