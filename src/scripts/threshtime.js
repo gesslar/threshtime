@@ -89,7 +89,7 @@ export const getTime = when => {
   const devotionCycle = Math.floor(daysFromStart / 24)
   const devotion = devotionCycle >= config.devotions.length
     ? config.voidDevotion
-    : config.devotions[devotionCycle - 1]
+    : config.devotions[devotionCycle]
 
   return {
     year, month, monthName, day,
