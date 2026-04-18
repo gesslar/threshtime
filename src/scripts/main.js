@@ -23,7 +23,7 @@ const formatOptions = {
 }
 
 const parseRLDate = (date = new Date(), timezone = null) => {
-  const options = formatOptions
+  const options = structuredClone(formatOptions)
 
   if(timezone && typeof timezone === "string")
     options.timeZone = timezone
@@ -75,12 +75,9 @@ const padWithZeroes = (given, padding) => {
 const copyInformation = control => {
   control.select()
   control.setSelectionRange(0, 999999)
-  console.log(control.parentElement)
 
   control.parentElement?.classList.add("copied")
   control.parentElement?.addEventListener("transitionend", evt => {
-    console.info(evt)
-    // console.info("hi")
     evt.target.classList.remove("copied")
   }, {once: true})
 
