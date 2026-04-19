@@ -7,10 +7,11 @@
   "description": "A page to convert between real life time and Threshold in-game time.",
   "license": "0BSD",
   "scripts": {
+    "update": "npx npm-check-updates -u && npm install",
     "icons": "magick -background none -density 1200 src/img/hourglass.svg -resize 192x192 src/img/icon-192.png && magick -background none -density 1200 src/img/hourglass.svg -resize 512x512 src/img/icon-512.png"
   },
   "devDependencies": {
     "@gesslar/uglier": "^2.4.1",
-    "eslint": "^10.2.0"
+    "eslint": "^10.2.1"
   }
 }
