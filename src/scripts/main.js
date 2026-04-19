@@ -1,17 +1,17 @@
 import {getTime} from "./threshtime.js"
 
+const convertButton = document.getElementById("convert")
+
 const rlDateInput = document.getElementById("rldateinput")
 const rlTimeInput = document.getElementById("rltimeinput")
 
-const etDateTimeOuput = document.getElementById("etdatetimeoutput")
-const icDateTimeOuput = document.getElementById("icdatetimeoutput")
+const rlDateTimeOutput = document.getElementById("etdatetimeoutput")
+const icDateTimeOutput = document.getElementById("icdatetimeoutput")
 
 const icMoreInfoOutput = document.getElementById("icmoreinfo")
 
-const cpIc = document.getElementById("copyic")
-const cpEt = document.getElementById("copyet")
-
-const convertButton = document.getElementById("convert")
+const copyIcButton = document.getElementById("copyic")
+const copyRlButton = document.getElementById("copyet")
 
 const formatOptions = {
   year: "numeric",
@@ -46,21 +46,36 @@ const setCurrentDateTime = () => {
   rlDateInput.value = `${year}-${month}-${day}`
   rlTimeInput.value = `${hour}:${minute}:00.000`
 
-  updateTimes(rlDateInput.value, rlTimeInput.value)
+  updateTimes(rlDateInput, rlTimeInput)
 }
 
-const updateTimes = (dateValue, timeValue) => {
-  const date = new Date(`${dateValue} ${timeValue}`)
-  const {month, day, year, hour, minute} = parseRLDate(date, "America/Toronto")
-  const rlEt = `${year}-${month}-${day} ${hour}:${minute}`
-  etDateTimeOuput.value = rlEt
+const updateRlOutput = date => {
+  const object = parseRLDate(date, "America/Toronto")
+  const {month, day, year, hour, minute} = object
 
-  const jsonified = getTime(date)
-  icDateTimeOuput.value = `${jsonified.monthName} ${jsonified.day}, ${jsonified.year} ${jsonified.hour}:${padWithZeroes(jsonified.minute, 2)}`
+  rlDateTimeOutput.value = `${year}-${month}-${day} ${hour}:${minute}`
+}
+
+const updateIcOutput = date => {
+  const object = getTime(date)
+  const {monthName, day, year, hour, minute} = object
+
+  icDateTimeOutput.value = `${monthName} ${day}, ${year} ${hour}:${padWithZeroes(minute, 2)}`
+
+  const {weekday, stage, season, devotion} = object
+
   icMoreInfoOutput.innerText =
-    `Weekday: ${jsonified.weekday}\n` +
-    `Season: ${jsonified.stage.charAt(0).toUpperCase()}${jsonified.stage.slice(1)} ${jsonified.season.charAt(0).toUpperCase()}${jsonified.season.slice(1)}\n` +
-    `Devotion: ${jsonified.devotion}`
+    `Weekday: ${weekday}\n` +
+    `Season: ${stage.charAt(0).toUpperCase()}${stage.slice(1)} ${season.charAt(0).toUpperCase()}${season.slice(1)}\n` +
+    `Devotion: ${devotion}`
+}
+
+const updateTimes = (date, time) => {
+  const dateString = `${date.value}T${time.value}`
+  const newDate = new Date(dateString)
+
+  updateRlOutput(newDate)
+  updateIcOutput(newDate)
 }
 
 const padWithZeroes = (given, padding) => {
@@ -72,23 +87,29 @@ const padWithZeroes = (given, padding) => {
   return `${"0".repeat(padding - result.length)}${result}`
 }
 
-const copyInformation = control => {
-  control.select()
-  control.setSelectionRange(0, 999999)
+const buttonClickEffect = event => {
+  const control = event.target.closest("div.group")
 
-  control.parentElement?.classList.add("copied")
-  control.parentElement?.addEventListener("transitionend", evt => {
-    evt.target.classList.remove("copied")
-  }, {once: true})
+  if(!control)
+    return
 
-  document.execCommand("copy")
-  control.blur()
-
-  window.getSelection().removeAllRanges()
+  control.classList.add("clicked")
+  control.addEventListener("transitionend",
+    evt => evt.target.classList.remove("clicked"), {once: true}
+  )
 }
 
-cpIc.addEventListener("click", () => copyInformation(icDateTimeOuput))
-cpEt.addEventListener("click", () => copyInformation(etDateTimeOuput))
-convertButton.addEventListener("click", () => updateTimes(rlDateInput.value, rlTimeInput.value))
+const copyInformation = async control => {
+  await navigator.clipboard.writeText(control.value)
+}
+
+copyIcButton.addEventListener("click", () => copyInformation(icDateTimeOutput))
+copyIcButton.addEventListener("click", buttonClickEffect)
+
+copyRlButton.addEventListener("click", () => copyInformation(rlDateTimeOutput))
+copyRlButton.addEventListener("click", buttonClickEffect)
+
+convertButton.addEventListener("click", () => updateTimes(rlDateInput, rlTimeInput))
+convertButton.addEventListener("click", buttonClickEffect)
 
 document.addEventListener("DOMContentLoaded", setCurrentDateTime)
