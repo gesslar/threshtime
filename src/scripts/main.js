@@ -113,3 +113,9 @@ convertButton.addEventListener("click", () => updateTimes(rlDateInput, rlTimeInp
 convertButton.addEventListener("click", buttonClickEffect)
 
 document.addEventListener("DOMContentLoaded", setCurrentDateTime)
+
+if("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js", {scope: "/"})
+  })
+}
