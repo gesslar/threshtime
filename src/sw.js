@@ -1,15 +1,15 @@
 const CACHE_NAME = "threshtime-v1"
 
 const PRECACHE_URLS = [
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/css/style.css",
-  "/img/hourglass.svg",
-  "/img/icon-192.png",
-  "/img/icon-512.png",
-  "/scripts/main.js",
-  "/scripts/threshtime.js"
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./css/style.css",
+  "./img/hourglass.svg",
+  "./img/icon-192.png",
+  "./img/icon-512.png",
+  "./scripts/main.js",
+  "./scripts/threshtime.js"
 ]
 
 self.addEventListener("install", event => {
@@ -55,7 +55,7 @@ self.addEventListener("fetch", event => {
         })
         .catch(() => {
           if(request.mode === "navigate")
-            return caches.match("/index.html")
+            return caches.match("./index.html")
 
           return Response.error()
         })
